@@ -20,7 +20,7 @@ This is a full-stack **React & Node.js recipe app** that allows users to **brows
 ## Installation & Setup
 1. **Clone the repository:**
    ```sh
-   git clone https://github.com/yourusername/recipe-app.git
+   git clone https://github.com/itzxtito/capstone-frontend.git
    cd recipe-app
    ```
 
@@ -56,10 +56,8 @@ This is a full-stack **React & Node.js recipe app** that allows users to **brows
 | `GET` | `/api/users/:email/favorites` | Get user’s favorite recipes |
 
 ## Future Improvements
-🔹 Add authentication (optional)  
-🔹 Improve UI with better styling  
-🔹 Implement search & filter features  
+🔹 More Recipes!
 
 ## Author
-📌 **Your Name** – [GitHub Profile](https://github.com/yourusername)
+📌 **Tito Feliciano** – [GitHub Profile](https://github.com/itzxtito)
 ```
