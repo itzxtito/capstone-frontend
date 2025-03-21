@@ -1,6 +1,6 @@
 
 
-```md
+``
 # Recipe App 🍽️
 
 ## Overview
@@ -22,7 +22,6 @@ This is a full-stack **React & Node.js recipe app** that allows users to **brows
    ```sh
    git clone https://github.com/itzxtito/capstone-frontend.git
    cd recipe-app
-   ```
 
 2. **Install backend dependencies & start the server:**
    ```sh
