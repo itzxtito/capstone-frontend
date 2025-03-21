@@ -1,6 +1,3 @@
-
-
-``
 # Recipe App 🍽️
 
 ## Overview
