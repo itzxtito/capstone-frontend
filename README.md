@@ -1,4 +1,4 @@
-Sure! Here’s the complete **README.md** in one code block for easy copying:  
+
 
 ```md
 # Recipe App 🍽️
