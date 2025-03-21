@@ -63,5 +63,3 @@ This is a full-stack **React & Node.js recipe app** that allows users to **brows
 ## Author
 📌 **Your Name** – [GitHub Profile](https://github.com/yourusername)
 ```
-
-✅ **Now you can easily copy and paste it into `README.md`!** Let me know if you need any final tweaks. 🚀
