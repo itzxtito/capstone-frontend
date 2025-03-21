@@ -60,4 +60,3 @@ This is a full-stack **React & Node.js recipe app** that allows users to **brows
 
 ## Author
 📌 **Tito Feliciano** – [GitHub Profile](https://github.com/itzxtito)
-```
