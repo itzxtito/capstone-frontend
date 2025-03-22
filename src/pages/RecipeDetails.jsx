@@ -37,6 +37,8 @@ const RecipeDetails = () => {
   if (loading) return <h2>Loading recipe...</h2>;
   if (!recipe) return <h2>Recipe not found!</h2>;
 
+
+  //Here this link will send uploaded images from users to MongoDB successfully!
   return (
     <div className="container">
       <h2>{recipe.name}</h2>
