@@ -23,20 +23,21 @@ const UserProfile = () => {
     fetchRecipes();
   }, [userEmail]);
 
-  const handleDelete = async (recipeId, author) => {
+  const handleDelete = async (recipeId, recipeAuthor) => { // ✅ Ensure author is passed correctly
+    console.log(`🛠 Attempting to delete: Recipe ID ${recipeId} by ${recipeAuthor}`);
+
     try {
       await axios.delete(`http://localhost:5001/api/recipes/${recipeId}`, {
-        data: { author }, // ✅ Send author name in the request body
+        data: { author: recipeAuthor }, // ✅ Ensure author is sent in request body
       });
-  
+
       setCreatedRecipes(createdRecipes.filter(recipe => recipe._id !== recipeId));
       alert("Recipe deleted successfully!");
     } catch (error) {
-      console.error("Error deleting recipe:", error);
+      console.error("❌ Error deleting recipe:", error.response?.data || error);
       alert("Failed to delete recipe.");
     }
   };
-  
 
   return (
     <div className="container">
@@ -52,7 +53,10 @@ const UserProfile = () => {
                 <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} />
                 <h3>{recipe.name}</h3>
               </Link>
-              <button onClick={() => handleDelete(recipe._id)} className="delete-btn">Delete</button>
+              {/* ✅ Corrected Delete Button Implementation */}
+              <button onClick={() => handleDelete(recipe._id, recipe.author)} className="delete-btn">
+                Delete
+              </button>
               <Link to={`/edit-recipe/${recipe._id}`} className="edit-btn">Edit</Link>
             </div>
           ))}
