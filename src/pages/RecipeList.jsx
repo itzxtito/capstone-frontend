@@ -55,7 +55,7 @@ const RecipeList = () => {
           recipes.map((recipe) => (
             <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="recipe-link">
               <div className="recipe-card">
-                <img src={recipe.image} alt={recipe.name} />
+              <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} />
                 <h3>{recipe.name}</h3>
               </div>
             </Link>

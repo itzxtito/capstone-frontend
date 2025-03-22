@@ -40,7 +40,7 @@ const RecipeDetails = () => {
   return (
     <div className="container">
       <h2>{recipe.name}</h2>
-      <img src={recipe.image} alt={recipe.name} className="recipe-image" />
+      <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} className="recipe-image" /> 
       <h3>Ingredients:</h3>
       <ul>
         {recipe.ingredients.map((ingredient, index) => (

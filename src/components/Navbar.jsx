@@ -5,9 +5,10 @@ const Navbar = () => {
     <nav style={styles.navbar}>
       <h1 style={styles.logo}>Recipe App</h1>
       <ul style={styles.navLinks}>
-        <li><Link to="/">Home</Link></li>
-        <li><Link to="/recipes">Recipes</Link></li>
-        <li><Link to="/profile">Profile</Link></li>
+      <li><Link to="/">Home</Link></li>
+       <li><Link to="/recipes">Recipes</Link></li>
+       <li><Link to="/profile">Profile</Link></li>
+        <li><Link to="/add-recipe">Add Your Own Recipe</Link></li> {/* New Link */}
       </ul>
     </nav>
   );
@@ -31,3 +32,4 @@ const styles = {
 };
 
 export default Navbar;
+
