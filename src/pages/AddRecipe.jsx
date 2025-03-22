@@ -26,23 +26,29 @@ const AddRecipe = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formDataToSend = new FormData();
-
+  
     for (let key in formData) {
       formDataToSend.append(key, formData[key]);
     }
-
+  
     try {
       const response = await axios.post("http://localhost:5001/api/recipes", formDataToSend, {
-        headers: { "Content-Type": "multipart/form-data" }
+        headers: { "Content-Type": "multipart/form-data" },
       });
-
-      alert(response.data.message); // ✅ Show notification after submission
-      navigate("/recipes"); // ✅ Redirect to recipes page
+  
+      if (response.data.message) {
+        alert(response.data.message); // ✅ Show success message from backend
+      } else {
+        alert("Recipe Submitted Successfully!"); // ✅ Fallback message
+      }
+  
+      navigate("/recipes"); // ✅ Redirect to the recipes page
     } catch (error) {
       console.error("Error adding recipe:", error);
       alert("Failed to submit recipe. Please try again.");
     }
   };
+  
 
   return (
     <div className="container">
