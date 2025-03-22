@@ -12,7 +12,10 @@ const RecipeList = () => {
     const fetchRecipes = async () => {
       try {
         const response = await axios.get(`http://localhost:5001/api/recipes`, {
-          params: { search: searchTerm, category: category !== "All" ? category : undefined }
+          params: {
+            search: searchTerm,
+            category: category !== "All" ? category : undefined,
+          },
         });
         setRecipes(response.data);
       } catch (error) {
@@ -41,21 +44,53 @@ const RecipeList = () => {
       />
 
       {/* Filter Dropdown */}
-      <select value={category} onChange={(e) => setCategory(e.target.value)} className="filter-dropdown">
+      <select
+        value={category}
+        onChange={(e) => setCategory(e.target.value)}
+        className="filter-dropdown"
+      >
         <option value="All">All Categories</option>
         <option value="Italian">Italian</option>
         <option value="Mexican">Mexican</option>
+        <option value="Chinese">Chinese</option>
         <option value="Indian">Indian</option>
-        <option value="Asian">Asian</option>
+        <option value="French">French</option>
+        <option value="Japanese">Japanese</option>
+        <option value="Thai">Thai</option>
+        <option value="American">American</option>
+        <option value="Mediterranean">Mediterranean</option>
+        <option value="Spanish">Spanish</option>
+        <option value="Greek">Greek</option>
+        <option value="Vietnamese">Vietnamese</option>
+        <option value="Korean">Korean</option>
+        <option value="Middle Eastern">Middle Eastern</option>
+        <option value="British">British</option>
+        <option value="German">German</option>
+        <option value="Russian">Russian</option>
+        <option value="Caribbean">Caribbean</option>
+        <option value="Brazilian">Brazilian</option>
+        <option value="Moroccan">Moroccan</option>
+        <option value="Ethiopian">Ethiopian</option>
+        <option value="Turkish">Turkish</option>
+        <option value="Australian">Australian</option>
+        <option value="Dessert">Dessert</option>
+        <option value="Vegetarian/Vegan">Vegetarian/Vegan</option>
       </select>
 
       {/* Recipe Grid */}
       <div className="recipe-grid">
         {recipes.length > 0 ? (
           recipes.map((recipe) => (
-            <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="recipe-link">
+            <Link
+              to={`/recipes/${recipe._id}`}
+              key={recipe._id}
+              className="recipe-link"
+            >
               <div className="recipe-card">
-              <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} />
+                <img
+                  src={`http://localhost:5001${recipe.image}`}
+                  alt={recipe.name}
+                />
                 <h3>{recipe.name}</h3>
               </div>
             </Link>

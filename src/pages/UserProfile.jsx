@@ -23,16 +23,20 @@ const UserProfile = () => {
     fetchRecipes();
   }, [userEmail]);
 
-  const handleDelete = async (recipeId) => {
+  const handleDelete = async (recipeId, author) => {
     try {
       await axios.delete(`http://localhost:5001/api/recipes/${recipeId}`, {
-        data: { author: userEmail },
+        data: { author }, // ✅ Send author name in the request body
       });
+  
       setCreatedRecipes(createdRecipes.filter(recipe => recipe._id !== recipeId));
+      alert("Recipe deleted successfully!");
     } catch (error) {
       console.error("Error deleting recipe:", error);
+      alert("Failed to delete recipe.");
     }
   };
+  
 
   return (
     <div className="container">
