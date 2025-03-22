@@ -1,23 +1,40 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import axios from "axios";
 
 const Home = () => {
-  // Sample featured recipes
-  const [featuredRecipes] = useState([
-    { id: 1, name: "Spaghetti Carbonara", image: "https://hipfoodiemom.com/wp-content/uploads/2020/04/IMG_9525-2-500x500.jpg" },
-    { id: 2, name: "Chicken Tikka Masala", image: "https://hipfoodiemom.com/wp-content/uploads/2020/04/IMG_9525-2-500x500.jpg" },
-    { id: 3, name: "Vegetable Stir Fry", image: "https://hipfoodiemom.com/wp-content/uploads/2020/04/IMG_9525-2-500x500.jpg" },
-  ]);
+  const [featuredRecipes, setFeaturedRecipes] = useState([]);
+
+  useEffect(() => {
+    const fetchFeaturedRecipes = async () => {
+      try {
+        const response = await axios.get("http://localhost:5001/api/recipes/featured");
+        setFeaturedRecipes(response.data);
+      } catch (error) {
+        console.error("Error fetching featured recipes:", error);
+      }
+    };
+
+    fetchFeaturedRecipes();
+  }, []);
 
   return (
     <div className="container">
       <h2>Featured Recipes</h2>
       <div className="recipe-grid">
-        {featuredRecipes.map((recipe) => (
-          <div key={recipe.id} className="recipe-card">
-            <img src={recipe.image} alt={recipe.name} />
-            <h3>{recipe.name}</h3>
-          </div>
-        ))}
+        {featuredRecipes.length > 0 ? (
+          featuredRecipes.map((recipe) => (
+            <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="recipe-link">
+              <div className="recipe-card">
+                <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} />
+                <h3>{recipe.name}</h3>
+                <p><strong>By:</strong> {recipe.author}</p>
+              </div>
+            </Link>
+          ))
+        ) : (
+          <p>No recipes available.</p>
+        )}
       </div>
     </div>
   );

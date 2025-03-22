@@ -1,36 +1,70 @@
-import { useFavorites } from "../context/FavoritesContext";
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 
 const UserProfile = () => {
-  const { favorites } = useFavorites();
+  const userEmail = "test@example.com"; // Replace with dynamic user email if needed
+  const [createdRecipes, setCreatedRecipes] = useState([]);
   const [favoriteRecipes, setFavoriteRecipes] = useState([]);
 
   useEffect(() => {
-    const fetchFavorites = async () => {
+    const fetchRecipes = async () => {
       try {
-        const response = await axios.get("http://localhost:5001/api/users/test@example.com/favorites");
-        setFavoriteRecipes(response.data);
+        const createdRes = await axios.get(`http://localhost:5001/api/recipes?author=${userEmail}`);
+        const favoriteRes = await axios.get(`http://localhost:5001/api/users/${userEmail}/favorites`);
+
+        setCreatedRecipes(createdRes.data);
+        setFavoriteRecipes(favoriteRes.data);
       } catch (error) {
-        console.error("Error fetching favorites:", error);
+        console.error("Error fetching user recipes:", error);
       }
     };
 
-    fetchFavorites();
-  }, []);
+    fetchRecipes();
+  }, [userEmail]);
+
+  const handleDelete = async (recipeId) => {
+    try {
+      await axios.delete(`http://localhost:5001/api/recipes/${recipeId}`, {
+        data: { author: userEmail },
+      });
+      setCreatedRecipes(createdRecipes.filter(recipe => recipe._id !== recipeId));
+    } catch (error) {
+      console.error("Error deleting recipe:", error);
+    }
+  };
 
   return (
     <div className="container">
-      <h2>My Favorite Recipes</h2>
+      <h2>My Profile</h2>
 
+      {/* Created Recipes Section */}
+      <h3>Created Recipes</h3>
+      {createdRecipes.length > 0 ? (
+        <div className="recipe-grid">
+          {createdRecipes.map((recipe) => (
+            <div key={recipe._id} className="recipe-card">
+              <Link to={`/recipes/${recipe._id}`}>
+                <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} />
+                <h3>{recipe.name}</h3>
+              </Link>
+              <button onClick={() => handleDelete(recipe._id)} className="delete-btn">Delete</button>
+              <Link to={`/edit-recipe/${recipe._id}`} className="edit-btn">Edit</Link>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>You haven't created any recipes yet.</p>
+      )}
+
+      {/* Favorite Recipes Section */}
+      <h3>Favorite Recipes</h3>
       {favoriteRecipes.length > 0 ? (
         <div className="recipe-grid">
           {favoriteRecipes.map((recipe) => (
             <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="recipe-link">
               <div className="recipe-card">
-              <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} />
-
+                <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} />
                 <h3>{recipe.name}</h3>
               </div>
             </Link>

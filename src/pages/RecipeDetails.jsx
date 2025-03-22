@@ -5,8 +5,9 @@ import axios from "axios";
 const RecipeDetails = () => {
   const { id } = useParams();
   const [recipe, setRecipe] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const userEmail = "test@example.com"; // Replace with dynamic user email if needed
+  const [comments, setComments] = useState([]);
+  const [newComment, setNewComment] = useState("");
+  const [username, setUsername] = useState("");
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -15,34 +16,47 @@ const RecipeDetails = () => {
         setRecipe(response.data);
       } catch (error) {
         console.error("Error fetching recipe:", error);
-      } finally {
-        setLoading(false);
+      }
+    };
+
+    const fetchComments = async () => {
+      try {
+        const response = await axios.get(`http://localhost:5001/api/comments/${id}`);
+        setComments(response.data);
+      } catch (error) {
+        console.error("Error fetching comments:", error);
       }
     };
 
     fetchRecipe();
+    fetchComments();
   }, [id]);
 
-  const handleAddToFavorites = async () => {
+  const handleCommentSubmit = async (e) => {
+    e.preventDefault();
+    if (!newComment.trim() || !username.trim()) return;
+
     try {
-      await axios.post(`http://localhost:5001/api/users/${userEmail}/favorites`, {
-        recipeId: recipe._id,
+      await axios.post(`http://localhost:5001/api/comments/${id}`, {
+        username,
+        text: newComment,
       });
-      alert("Recipe added to favorites!");
+
+      setComments([...comments, { username, text: newComment }]);
+      setNewComment("");
+      setUsername("");
     } catch (error) {
-      console.error("Error adding to favorites:", error);
+      console.error("Error adding comment:", error);
     }
   };
 
-  if (loading) return <h2>Loading recipe...</h2>;
   if (!recipe) return <h2>Recipe not found!</h2>;
 
-
-  //Here this link will send uploaded images from users to MongoDB successfully!
   return (
     <div className="container">
       <h2>{recipe.name}</h2>
-      <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} className="recipe-image" /> 
+      <p><strong>Posted by:</strong> {recipe.author}</p> {/* ✅ Show author */}
+      <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} className="recipe-image" />
       <h3>Ingredients:</h3>
       <ul>
         {recipe.ingredients.map((ingredient, index) => (
@@ -51,9 +65,31 @@ const RecipeDetails = () => {
       </ul>
       <h3>Instructions:</h3>
       <p>{recipe.instructions}</p>
-      <button onClick={handleAddToFavorites} className="save-btn">
-        Save to Favorites
-      </button>
+
+      {/* Comment Section */}
+      <h3>Comments</h3>
+      <ul>
+        {comments.map((comment, index) => (
+          <li key={index}><strong>{comment.username}:</strong> {comment.text}</li>
+        ))}
+      </ul>
+
+      <form onSubmit={handleCommentSubmit}>
+        <input
+          type="text"
+          placeholder="Your Name"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}
+          required
+        />
+        <textarea
+          placeholder="Write a comment..."
+          value={newComment}
+          onChange={(e) => setNewComment(e.target.value)}
+          required
+        />
+        <button type="submit">Post Comment</button>
+      </form>
     </div>
   );
 };

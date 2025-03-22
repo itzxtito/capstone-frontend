@@ -5,6 +5,12 @@ import RecipeList from "./pages/RecipeList";
 import RecipeDetails from "./pages/RecipeDetails";
 import UserProfile from "./pages/UserProfile";
 import AddRecipe from "./pages/AddRecipe";
+import EditRecipe from "./pages/EditRecipe";
+
+<Routes>
+  
+</Routes>
+
 
 function AppRoutes() {
   return (
@@ -15,7 +21,8 @@ function AppRoutes() {
   <Route path="/recipes" element={<RecipeList />} />
   <Route path="/recipes/:id" element={<RecipeDetails />} />
   <Route path="/profile" element={<UserProfile />} />
-  <Route path="/add-recipe" element={<AddRecipe />} /> {/* New Route */}
+  <Route path="/add-recipe" element={<AddRecipe />} />
+  <Route path="/edit-recipe/:id" element={<EditRecipe />} />
       </Routes>
     </Router>
   );
