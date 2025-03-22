@@ -8,8 +8,10 @@ const AddRecipe = () => {
     category: "",
     ingredients: "",
     instructions: "",
+    author: "", // ✅ New input for username
     image: null,
   });
+
   const navigate = useNavigate();
 
   const handleChange = (e) => {
@@ -30,13 +32,15 @@ const AddRecipe = () => {
     }
 
     try {
-      await axios.post("http://localhost:5001/api/recipes", formDataToSend, {
+      const response = await axios.post("http://localhost:5001/api/recipes", formDataToSend, {
         headers: { "Content-Type": "multipart/form-data" }
       });
-      alert("Recipe added successfully!");
-      navigate("/recipes");
+
+      alert(response.data.message); // ✅ Show notification after submission
+      navigate("/recipes"); // ✅ Redirect to recipes page
     } catch (error) {
       console.error("Error adding recipe:", error);
+      alert("Failed to submit recipe. Please try again.");
     }
   };
 
@@ -48,6 +52,7 @@ const AddRecipe = () => {
         <input type="text" name="category" placeholder="Category" value={formData.category} onChange={handleChange} required />
         <textarea name="ingredients" placeholder="Ingredients (comma-separated)" value={formData.ingredients} onChange={handleChange} required />
         <textarea name="instructions" placeholder="Instructions" value={formData.instructions} onChange={handleChange} required />
+        <input type="text" name="author" placeholder="Your Name" value={formData.author} onChange={handleChange} required /> {/* ✅ New input */}
         <input type="file" name="image" accept="image/*" onChange={handleFileChange} required />
         <button type="submit">Submit Recipe</button>
       </form>

@@ -37,12 +37,12 @@ const RecipeDetails = () => {
     if (!newComment.trim() || !username.trim()) return;
 
     try {
-      await axios.post(`http://localhost:5001/api/comments/${id}`, {
+      const response = await axios.post(`http://localhost:5001/api/comments/${id}`, {
         username,
         text: newComment,
       });
 
-      setComments([...comments, { username, text: newComment }]);
+      setComments([...comments, response.data]); // ✅ Ensure new comments update the UI
       setNewComment("");
       setUsername("");
     } catch (error) {
@@ -55,7 +55,7 @@ const RecipeDetails = () => {
   return (
     <div className="container">
       <h2>{recipe.name}</h2>
-      <p><strong>Posted by:</strong> {recipe.author}</p> {/* ✅ Show author */}
+      <p><strong>Posted by:</strong> {recipe.author}</p>
       <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} className="recipe-image" />
       <h3>Ingredients:</h3>
       <ul>
@@ -66,14 +66,19 @@ const RecipeDetails = () => {
       <h3>Instructions:</h3>
       <p>{recipe.instructions}</p>
 
-      {/* Comment Section */}
+      {/* ✅ Comments Section */}
       <h3>Comments</h3>
       <ul>
-        {comments.map((comment, index) => (
-          <li key={index}><strong>{comment.username}:</strong> {comment.text}</li>
-        ))}
+        {comments.length > 0 ? (
+          comments.map((comment, index) => (
+            <li key={index}><strong>{comment.username}:</strong> {comment.text}</li>
+          ))
+        ) : (
+          <p>No comments yet. Be the first to comment!</p>
+        )}
       </ul>
 
+      {/* ✅ Add Comment Form */}
       <form onSubmit={handleCommentSubmit}>
         <input
           type="text"
