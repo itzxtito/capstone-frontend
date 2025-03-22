@@ -32,6 +32,17 @@ const RecipeDetails = () => {
     fetchComments();
   }, [id]);
 
+  const handleAddToFavorites = async () => {
+    try {
+      await axios.post(`http://localhost:5001/api/users/test@example.com/favorites`, {
+        recipeId: recipe._id,
+      });
+      alert("Recipe added to favorites!");
+    } catch (error) {
+      console.error("Error adding to favorites:", error);
+    }
+  };
+
   const handleCommentSubmit = async (e) => {
     e.preventDefault();
     if (!newComment.trim() || !username.trim()) return;
@@ -42,7 +53,7 @@ const RecipeDetails = () => {
         text: newComment,
       });
 
-      setComments([...comments, response.data]); // ✅ Ensure new comments update the UI
+      setComments([...comments, response.data]);
       setNewComment("");
       setUsername("");
     } catch (error) {
@@ -65,6 +76,11 @@ const RecipeDetails = () => {
       </ul>
       <h3>Instructions:</h3>
       <p>{recipe.instructions}</p>
+
+      {/* ✅ Restore "Add to Favorites" button */}
+      <button onClick={handleAddToFavorites} className="save-btn">
+        Save to Favorites
+      </button>
 
       {/* ✅ Comments Section */}
       <h3>Comments</h3>
