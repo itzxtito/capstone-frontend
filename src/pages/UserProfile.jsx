@@ -51,6 +51,17 @@ const UserProfile = () => {
     }
   };
 
+  const handleRemoveFavorite = async (recipeId) => {
+    try {
+      await axios.delete(`http://localhost:5001/api/users/${username}/favorites/${recipeId}`);
+      setFavoriteRecipes(favoriteRecipes.filter(recipe => recipe._id !== recipeId));
+      alert("Removed from favorites!");
+    } catch (error) {
+      console.error("Error removing favorite:", error);
+      alert("Failed to remove from favorites.");
+    }
+  };
+
   const handleLogout = () => {
     localStorage.removeItem("token");
     localStorage.removeItem("username");
@@ -89,12 +100,18 @@ const UserProfile = () => {
       {favoriteRecipes.length > 0 ? (
         <div className="recipe-grid">
           {favoriteRecipes.map((recipe) => (
-            <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="recipe-link">
-              <div className="recipe-card">
+            <div key={recipe._id} className="recipe-card">
+              <Link to={`/recipes/${recipe._id}`} className="recipe-link">
                 <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} />
                 <h3>{recipe.name}</h3>
-              </div>
-            </Link>
+              </Link>
+              <button
+                onClick={() => handleRemoveFavorite(recipe._id)}
+                className="delete-btn"
+              >
+                Remove
+              </button>
+            </div>
           ))}
         </div>
       ) : (
