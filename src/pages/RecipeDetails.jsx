@@ -7,7 +7,7 @@ const RecipeDetails = () => {
   const [recipe, setRecipe] = useState(null);
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
-  const [username, setUsername] = useState("");
+  const [username, setUsername] = useState(localStorage.getItem("username")); // Get the logged-in username from localStorage
 
   useEffect(() => {
     const fetchRecipe = async () => {
@@ -33,13 +33,21 @@ const RecipeDetails = () => {
   }, [id]);
 
   const handleAddToFavorites = async () => {
+    const username = localStorage.getItem("username"); // Get the username from localStorage
+  
     try {
-      await axios.post(`http://localhost:5001/api/users/test@example.com/favorites`, {
+      await axios.post(`http://localhost:5001/api/users/${username}/favorites`, {
         recipeId: recipe._id,
+      }, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
+        },
       });
+  
       alert("Recipe added to favorites!");
     } catch (error) {
       console.error("Error adding to favorites:", error);
+      alert("Failed to add to favorites.");
     }
   };
 
@@ -49,13 +57,12 @@ const RecipeDetails = () => {
 
     try {
       const response = await axios.post(`http://localhost:5001/api/comments/${id}`, {
-        username,
+        username, // Use the logged-in username
         text: newComment,
       });
 
       setComments([...comments, response.data]);
       setNewComment("");
-      setUsername("");
     } catch (error) {
       console.error("Error adding comment:", error);
     }
@@ -94,15 +101,8 @@ const RecipeDetails = () => {
         )}
       </ul>
 
-      {/* ✅ Add Comment Form */}
+      {/* ✅ Add Comment Form (No "Your Name" field, username is taken from localStorage) */}
       <form onSubmit={handleCommentSubmit}>
-        <input
-          type="text"
-          placeholder="Your Name"
-          value={username}
-          onChange={(e) => setUsername(e.target.value)}
-          required
-        />
         <textarea
           placeholder="Write a comment..."
           value={newComment}

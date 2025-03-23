@@ -22,7 +22,7 @@ const EditRecipe = () => {
           category: response.data.category,
           ingredients: response.data.ingredients.join(", "),
           instructions: response.data.instructions,
-          image: response.data.image,
+          image: null, // Don’t prefill file input
         });
       } catch (error) {
         console.error("Error fetching recipe:", error);
@@ -43,19 +43,30 @@ const EditRecipe = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    const token = localStorage.getItem("token");
+
     const formDataToSend = new FormData();
-    for (let key in formData) {
-      formDataToSend.append(key, formData[key]);
+    formDataToSend.append("name", formData.name);
+    formDataToSend.append("category", formData.category);
+    formDataToSend.append("ingredients", formData.ingredients);
+    formDataToSend.append("instructions", formData.instructions);
+    if (formData.image) {
+      formDataToSend.append("image", formData.image);
     }
 
     try {
       await axios.put(`http://localhost:5001/api/recipes/${id}`, formDataToSend, {
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          Authorization: `Bearer ${token}`,
+          "Content-Type": "multipart/form-data",
+        },
       });
+
       alert("Recipe updated successfully!");
       navigate("/profile");
     } catch (error) {
       console.error("Error updating recipe:", error);
+      alert("Failed to update recipe. Make sure you're logged in.");
     }
   };
 
@@ -63,11 +74,38 @@ const EditRecipe = () => {
     <div className="container">
       <h2>Edit Recipe</h2>
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" value={formData.name} onChange={handleChange} required />
-        <input type="text" name="category" value={formData.category} onChange={handleChange} required />
-        <textarea name="ingredients" value={formData.ingredients} onChange={handleChange} required />
-        <textarea name="instructions" value={formData.instructions} onChange={handleChange} required />
-        <input type="file" name="image" accept="image/*" onChange={handleFileChange} />
+        <input
+          type="text"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="text"
+          name="category"
+          value={formData.category}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="ingredients"
+          value={formData.ingredients}
+          onChange={handleChange}
+          required
+        />
+        <textarea
+          name="instructions"
+          value={formData.instructions}
+          onChange={handleChange}
+          required
+        />
+        <input
+          type="file"
+          name="image"
+          accept="image/*"
+          onChange={handleFileChange}
+        />
         <button type="submit">Update Recipe</button>
       </form>
     </div>

@@ -3,63 +3,68 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 const AddRecipe = () => {
-  const [formData, setFormData] = useState({
+  const navigate = useNavigate();
+  const [recipeData, setRecipeData] = useState({
     name: "",
     category: "",
     ingredients: "",
     instructions: "",
-    author: "", // ✅ New input for username
-    image: null,
+    image: null
   });
+  const [error, setError] = useState("");
 
-  const navigate = useNavigate();
+  // Get the logged-in username and token from localStorage
+  const username = localStorage.getItem("username");
+  const token = localStorage.getItem("token");
 
   const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  const handleFileChange = (e) => {
-    setFormData({ ...formData, image: e.target.files[0] });
+    const { name, value, files } = e.target;
+    if (name === "image") {
+      setRecipeData({ ...recipeData, image: files[0] });
+    } else {
+      setRecipeData({ ...recipeData, [name]: value });
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formDataToSend = new FormData();
-  
-    for (let key in formData) {
-      formDataToSend.append(key, formData[key]);
-    }
-  
+    setError("");
+
+    const formData = new FormData();
+    formData.append("name", recipeData.name);
+    formData.append("category", recipeData.category);
+    formData.append("ingredients", recipeData.ingredients);
+    formData.append("instructions", recipeData.instructions);
+    formData.append("image", recipeData.image);
+    formData.append("author", username); // Automatically set the author to the logged-in username
+
     try {
-      const response = await axios.post("http://localhost:5001/api/recipes", formDataToSend, {
-        headers: { "Content-Type": "multipart/form-data" },
+      // Add token to the Authorization header
+      const response = await axios.post("http://localhost:5001/api/recipes", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+          Authorization: `Bearer ${token}`, // Add JWT token here
+        },
       });
-  
-      if (response.data.message) {
-        alert(response.data.message); // ✅ Show success message from backend
-      } else {
-        alert("Recipe Submitted Successfully!"); // ✅ Fallback message
-      }
-  
-      navigate("/recipes"); // ✅ Redirect to the recipes page
-    } catch (error) {
-      console.error("Error adding recipe:", error);
-      alert("Failed to submit recipe. Please try again.");
+
+      alert("Recipe Submitted Successfully");
+      navigate("/recipes");
+    } catch (err) {
+      console.error("Error adding recipe:", err);
+      setError("Failed to submit recipe. Please try again.");
     }
   };
-  
 
   return (
     <div className="container">
-      <h2>Add a New Recipe</h2>
+      <h2>Submit a New Recipe</h2>
+      {error && <p className="error">{error}</p>}
       <form onSubmit={handleSubmit}>
-        <input type="text" name="name" placeholder="Recipe Name" value={formData.name} onChange={handleChange} required />
-        <input type="text" name="category" placeholder="Category" value={formData.category} onChange={handleChange} required />
-        <textarea name="ingredients" placeholder="Ingredients (comma-separated)" value={formData.ingredients} onChange={handleChange} required />
-        <textarea name="instructions" placeholder="Instructions" value={formData.instructions} onChange={handleChange} required />
-        <input type="text" name="author" placeholder="Your Name" value={formData.author} onChange={handleChange} required /> {/* ✅ New input */}
-        <input type="file" name="image" accept="image/*" onChange={handleFileChange} required />
+        <input type="text" name="name" placeholder="Recipe Name" onChange={handleChange} required />
+        <input type="text" name="category" placeholder="Category" onChange={handleChange} required />
+        <input type="text" name="ingredients" placeholder="Ingredients (comma-separated)" onChange={handleChange} required />
+        <textarea name="instructions" placeholder="Instructions" onChange={handleChange} required />
+        <input type="file" name="image" accept="image/*" onChange={handleChange} />
         <button type="submit">Submit Recipe</button>
       </form>
     </div>
