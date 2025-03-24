@@ -31,6 +31,7 @@ const RecipeList = () => {
   if (loading) return <h2>Loading recipes...</h2>;
 
   return (
+    <div className="container fade-in">
     <div className="container">
     <div className="search-section">
       <h2>Browse Recipes</h2>
@@ -103,6 +104,7 @@ const RecipeList = () => {
           <p>No recipes found.</p>
         )}
       </div>
+    </div>
     </div>
     </div>
   );

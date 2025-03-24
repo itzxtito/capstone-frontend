@@ -71,6 +71,7 @@ const EditRecipe = () => {
   };
 
   return (
+    <div className="container fade-in">
     <div className="form-container">
     <div className="container">
       <h2>Edit Recipe</h2>
@@ -109,6 +110,7 @@ const EditRecipe = () => {
         />
         <button type="submit">Update Recipe</button>
       </form>
+    </div>
     </div>
     </div>
   );

@@ -7,10 +7,12 @@ import UserProfile from "./pages/UserProfile";
 import AddRecipe from "./pages/AddRecipe";
 import EditRecipe from "./pages/EditRecipe";
 import Signup from "./pages/Signup";
-import Login from "./pages/Login"; // ✅ Import login page (we'll create this next)
+import Login from "./pages/Login"; // ✅ Import login page 
+import Footer from "./components/Footer";
 
 function AppRoutes() {
   return (
+    <div className="app-wrapper">
     <Router>
       <Navbar />
       <Routes>
@@ -23,7 +25,10 @@ function AppRoutes() {
         <Route path="/signup" element={<Signup />} />  {/* ✅ Added Signup Route */}
         <Route path="/login" element={<Login />} />  ✅ Added Login Route
       </Routes>
+      <Footer/>
+      
     </Router>
+    </div>
   );
 }
 

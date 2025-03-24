@@ -29,6 +29,7 @@ const Signup = () => {
   };
 
   return (
+    <div className="container fade-in">
     <div className="auth-wrapper">
     <div className="form-container">
     <div className="container">
@@ -41,6 +42,7 @@ const Signup = () => {
         <button type="submit">Register</button>
       </form>
       <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
     </div>
     </div>
     </div>

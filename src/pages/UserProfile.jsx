@@ -69,6 +69,7 @@ const UserProfile = () => {
   };
 
   return (
+    <div className="container fade-in">
     <div className="container">
       <div className="profile-header">
   <img
@@ -128,6 +129,7 @@ const UserProfile = () => {
   <button onClick={handleLogout} className="logout-button">Logout</button>
 </div>
 
+    </div>
     </div>
     
   );

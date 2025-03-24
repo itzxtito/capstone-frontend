@@ -33,6 +33,7 @@ const Login = () => {
   };
 
   return (
+    <div className="container fade-in">
     <div className="auth-wrapper">
     <div className="form-container">
     <div className="container">
@@ -56,6 +57,7 @@ const Login = () => {
         <button type="submit">Login</button>
       </form>
       <p>Don't have an account? <a href="/signup">Sign up</a></p>
+    </div>
     </div>
     </div>
     </div>

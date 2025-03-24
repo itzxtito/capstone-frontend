@@ -19,6 +19,7 @@ const Home = () => {
   }, []);
 
   return (
+    <div className="container fade-in">
     <div className="home-container">
       <div className="home-hero">
         <h1>🍽️ Welcome to the Potluck!</h1>
@@ -41,6 +42,7 @@ const Home = () => {
           )}
         </div>
       </section>
+    </div>
     </div>
   );
 };

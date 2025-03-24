@@ -56,6 +56,7 @@ const AddRecipe = () => {
   };
 
   return (
+    <div className="container fade-in">
     <div className="auth-wrapper">
     <div className="form-container">
     <div className="container">
@@ -69,6 +70,7 @@ const AddRecipe = () => {
         <input type="file" name="image" accept="image/*" onChange={handleChange} />
         <button type="submit">Submit Recipe</button>
       </form>
+    </div>
     </div>
     </div>
     </div>

@@ -78,7 +78,7 @@ const RecipeDetails = () => {
   if (!recipe) return <h2>Recipe not found!</h2>;
 
   return (
-    
+    <div className="container fade-in">
     <div className="container recipe-details">
       <h2>{recipe.name}</h2>
       <p><strong>Posted by:</strong> {recipe.author}</p>
@@ -141,6 +141,7 @@ const RecipeDetails = () => {
   <div className="success-badge">✅ Comment posted!</div>
 )}
 
+    </div>
     </div>
   );
 };
