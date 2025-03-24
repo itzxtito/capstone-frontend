@@ -97,7 +97,7 @@ root
 ## 🔹 Future Improvements
 - Dark mode
 - User avatars
--Enhanced mobile gestures
+- Enhanced mobile gestures
 
 ---
 
