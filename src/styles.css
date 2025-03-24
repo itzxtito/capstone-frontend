@@ -49,6 +49,8 @@ button {
   font-size: 1rem;
   cursor: pointer;
   transition: background 0.3s ease;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 button:hover {
@@ -222,19 +224,30 @@ ul {
 .recipe-card {
   background: white;
   padding: 15px;
-  border-radius: 10px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
-  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
   text-align: center;
+  transition: 
+    transform 0.4s ease, 
+    box-shadow 0.4s ease, 
+    background 0.4s ease, 
+    border 0.4s ease;
   cursor: pointer;
-  max-width: 250px;
-  width: 100%;
+  border: 2px solid transparent;
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  max-width: 300px;
+ 
 }
 
 .recipe-card:hover {
-  transform: translateY(-5px) scale(1.02);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+  transform: perspective(1000px) rotateX(3deg) rotateY(-3deg) scale(1.05);
+  background: linear-gradient(90deg, #ff9e03, #f6ff00);
+  box-shadow: 0 15px 30px rgba(255, 99, 71, 0.35);
+  border: 1px solid #ffdd01;
 }
+
 
 
 .recipe-card img {
@@ -852,3 +865,55 @@ nav a.active-link::after {
 .form-container button[type="submit"]:hover {
   background-color: #e5533d;
 }
+
+/* === Auth Form Styling === */
+.form-container {
+  max-width: 400px;
+  margin: 60px auto;
+  padding: 30px;
+  background-color: white;
+  border-radius: 16px;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+}
+
+.form-container h2 {
+  text-align: center;
+  color: #ff6347;
+  margin-bottom: 20px;
+  font-size: 2rem;
+}
+
+/* Already global input & button styles should cover the rest */
+
+/* Form Footer */
+.form-footer {
+  text-align: center;
+  margin-top: 20px;
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.form-footer a {
+  color: #ff6347;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.form-footer a:hover {
+  text-decoration: underline;
+}
+
+.auth-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 80px); /* adjust if needed for navbar height */
+}
+
+ .featured-card:hover {
+  transform: perspective(1000px) rotateX(3deg) rotateY(-3deg) scale(1.05);
+  background: linear-gradient(90deg, #ff9e03, #f6ff00);
+  box-shadow: 0 15px 30px rgba(255, 99, 71, 0.35);
+  border: 1px solid #ffdd01;
+}
+

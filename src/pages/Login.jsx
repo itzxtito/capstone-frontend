@@ -33,6 +33,8 @@ const Login = () => {
   };
 
   return (
+    <div className="auth-wrapper">
+    <div className="form-container">
     <div className="container">
       <h2>Login</h2>
       {error && <p className="error">{error}</p>}
@@ -54,6 +56,8 @@ const Login = () => {
         <button type="submit">Login</button>
       </form>
       <p>Don't have an account? <a href="/signup">Sign up</a></p>
+    </div>
+    </div>
     </div>
   );
 };

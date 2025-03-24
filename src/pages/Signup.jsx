@@ -29,6 +29,8 @@ const Signup = () => {
   };
 
   return (
+    <div className="auth-wrapper">
+    <div className="form-container">
     <div className="container">
       <h2>Sign Up</h2>
       {error && <p className="error">{error}</p>}
@@ -39,6 +41,8 @@ const Signup = () => {
         <button type="submit">Register</button>
       </form>
       <p>Already have an account? <a href="/login">Login</a></p>
+    </div>
+    </div>
     </div>
   );
 };
