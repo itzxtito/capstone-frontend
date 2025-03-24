@@ -70,9 +70,15 @@ const UserProfile = () => {
 
   return (
     <div className="container">
-      <h2>My Profile</h2>
+      <div className="profile-header">
+  <img
+    src="https://avatars.dicebear.com/api/initials/🧑‍🍳.svg"
+    alt="Profile Avatar"
+    className="profile-avatar"
+  />
+  <h2>Welcome, {username}!</h2>
+</div>
 
-      <button onClick={handleLogout} style={styles.logoutButton}>Logout</button>
 
       {error && <p className="error">{error}</p>}
 
@@ -117,7 +123,13 @@ const UserProfile = () => {
       ) : (
         <p>You haven't saved any favorite recipes yet.</p>
       )}
+
+<div className="logout-container">
+  <button onClick={handleLogout} className="logout-button">Logout</button>
+</div>
+
     </div>
+    
   );
 };
 
