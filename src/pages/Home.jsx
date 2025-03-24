@@ -19,23 +19,28 @@ const Home = () => {
   }, []);
 
   return (
-    <div className="container">
-      <h2>Featured Recipes</h2>
-      <div className="recipe-grid">
-        {featuredRecipes.length > 0 ? (
-          featuredRecipes.map((recipe) => (
-            <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="recipe-link">
-              <div className="recipe-card">
+    <div className="home-container">
+      <div className="home-hero">
+        <h1>🍽️ Welcome to the Potluck!</h1>
+        <p>Discover delicious recipes from around the world or share your own!</p>
+      </div>
+
+      <section className="featured-section">
+        <h2>✨ Featured Recipes</h2>
+        <div className="featured-recipes">
+          {featuredRecipes.length > 0 ? (
+            featuredRecipes.map((recipe) => (
+              <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="featured-card">
                 <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} />
                 <h3>{recipe.name}</h3>
                 <p><strong>By:</strong> {recipe.author}</p>
-              </div>
-            </Link>
-          ))
-        ) : (
-          <p>No recipes available.</p>
-        )}
-      </div>
+              </Link>
+            ))
+          ) : (
+            <p>No recipes available.</p>
+          )}
+        </div>
+      </section>
     </div>
   );
 };

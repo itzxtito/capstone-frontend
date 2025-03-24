@@ -3,7 +3,7 @@ import { NavLink } from "react-router-dom";
 const Navbar = () => {
   return (
     <nav style={styles.navbar}>
-      <h1 style={styles.logo}>Tito's Recipe App</h1>
+      <h1 style={styles.logo}>🍲 Potluck App</h1>
       <ul style={styles.navLinks}>
         <li>
           <NavLink

@@ -71,6 +71,7 @@ const EditRecipe = () => {
   };
 
   return (
+    <div className="form-container">
     <div className="container">
       <h2>Edit Recipe</h2>
       <form onSubmit={handleSubmit}>
@@ -108,6 +109,7 @@ const EditRecipe = () => {
         />
         <button type="submit">Update Recipe</button>
       </form>
+    </div>
     </div>
   );
 };

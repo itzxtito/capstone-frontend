@@ -56,6 +56,7 @@ const AddRecipe = () => {
   };
 
   return (
+    <div className="form-container">
     <div className="container">
       <h2>Submit a New Recipe</h2>
       {error && <p className="error">{error}</p>}
@@ -67,6 +68,7 @@ const AddRecipe = () => {
         <input type="file" name="image" accept="image/*" onChange={handleChange} />
         <button type="submit">Submit Recipe</button>
       </form>
+    </div>
     </div>
   );
 };
