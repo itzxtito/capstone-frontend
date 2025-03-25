@@ -19,7 +19,7 @@ const Login = () => {
     setError("");
 
     try {
-      const response = await axios.post("https://capstone-backend-zdhp.onrender.com/api/auth/login", formData);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/login`, formData);
       
       // ✅ Save token & username in localStorage
       localStorage.setItem("token", response.data.token);

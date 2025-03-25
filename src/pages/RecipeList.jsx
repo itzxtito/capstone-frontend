@@ -92,7 +92,7 @@ const RecipeList = () => {
               className="recipe-link">
               <div className="recipe-card">
                 <img
-                  src={`https://capstone-backend-zdhp.onrender.com${recipe.image}`}
+                  src={`${import.meta.env.VITE_API_URL}${recipe.image}`}
                   alt={recipe.name}
                 />
                 <h3>{recipe.name}</h3>

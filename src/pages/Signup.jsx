@@ -20,7 +20,7 @@ const Signup = () => {
     setError("");
 
     try {
-      const response = await axios.post("https://capstone-backend-zdhp.onrender.com/api/auth/register", formData);
+      const response = await axios.post(`${import.meta.env.VITE_API_URL}/api/auth/register`, formData);
       alert(response.data.message);
       navigate("/login"); // ✅ Redirect to login page after successful signup
     } catch (error) {

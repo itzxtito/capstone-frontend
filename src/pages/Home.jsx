@@ -8,7 +8,7 @@ const Home = () => {
   useEffect(() => {
     const fetchFeaturedRecipes = async () => {
       try {
-        const response = await axios.get("https://capstone-backend-zdhp.onrender.com/api/recipes/featured");
+        const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/recipes/featured`);
         setFeaturedRecipes(response.data);
       } catch (error) {
         console.error("Error fetching featured recipes:", error);
@@ -32,7 +32,7 @@ const Home = () => {
           {featuredRecipes.length > 0 ? (
             featuredRecipes.map((recipe) => (
               <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="featured-card">
-                <img src={`https://capstone-backend-zdhp.onrender.com${recipe.image}`} alt={recipe.name} />
+                <img src={`${import.meta.env.VITE_API_URL}${recipe.image}`} alt={recipe.name} />
                 <h3>{recipe.name}</h3>
                 <p><strong>By:</strong> {recipe.author}</p>
               </Link>

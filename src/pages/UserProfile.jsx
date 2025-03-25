@@ -17,8 +17,8 @@ const UserProfile = () => {
     } else {
       const fetchRecipes = async () => {
         try {
-          const createdRes = await axios.get(`https://capstone-backend-zdhp.onrender.com/api/recipes?author=${username}`);
-          const favoriteRes = await axios.get(`https://capstone-backend-zdhp.onrender.com/api/users/${username}/favorites`);
+          const createdRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/recipes?author=${username}`);
+          const favoriteRes = await axios.get(`${import.meta.env.VITE_API_URL}/api/users/${username}/favorites`);
 
           setCreatedRecipes(createdRes.data);
           setFavoriteRecipes(favoriteRes.data);
@@ -36,7 +36,7 @@ const UserProfile = () => {
     console.log(`🛠 Attempting to delete: Recipe ID ${recipeId} by ${recipeAuthor}`);
 
     try {
-      await axios.delete(`https://capstone-backend-zdhp.onrender.com/api/recipes/${recipeId}`, {
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/recipes/${recipeId}`, {
         data: { author: recipeAuthor },
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -53,7 +53,7 @@ const UserProfile = () => {
 
   const handleRemoveFavorite = async (recipeId) => {
     try {
-      await axios.delete(`https://capstone-backend-zdhp.onrender.com/api/users/${username}/favorites/${recipeId}`);
+      await axios.delete(`${import.meta.env.VITE_API_URL}/api/users/${username}/favorites/${recipeId}`);
       setFavoriteRecipes(favoriteRecipes.filter(recipe => recipe._id !== recipeId));
       alert("Removed from favorites!");
     } catch (error) {
@@ -89,7 +89,7 @@ const UserProfile = () => {
           {createdRecipes.map((recipe) => (
             <div key={recipe._id} className="recipe-card">
               <Link to={`/recipes/${recipe._id}`}>
-                <img src={`https://capstone-backend-zdhp.onrender.com${recipe.image}`} alt={recipe.name} />
+                <img src={`${import.meta.env.VITE_API_URL}${recipe.image}`} alt={recipe.name} />
                 <h3>{recipe.name}</h3>
               </Link>
               <div className="button-group">
@@ -111,7 +111,7 @@ const UserProfile = () => {
           {favoriteRecipes.map((recipe) => (
             <div key={recipe._id} className="recipe-card">
               <Link to={`/recipes/${recipe._id}`} className="recipe-link">
-                <img src={`https://capstone-backend-zdhp.onrender.com${recipe.image}`} alt={recipe.name} />
+                <img src={`${import.meta.env.VITE_API_URL}${recipe.image}`} alt={recipe.name} />
                 <h3>{recipe.name}</h3>
               </Link>
               <button
