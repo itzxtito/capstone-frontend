@@ -617,7 +617,7 @@ nav a.active-link::after {
 }
 
 .ingredient-pill {
-  background-color: #ffe1d6;
+  background-color: gold;
   color: #333;
   padding: 8px 12px;
   border-radius: 20px;
@@ -628,7 +628,7 @@ nav a.active-link::after {
 
 .ingredient-pill:hover {
   transform: scale(1.05);
-  background-color: #ffc7b1;
+  background-color: #ffea09;
 }
 
 .comment-badges {
@@ -965,8 +965,8 @@ nav a.active-link::after {
 .app-footer {
   text-align: center;
   padding: 20px 10px;
-  background-color: #fff5ef;
-  color: #888;
+  background-color: #fe681c;
+  color: white;
   font-size: 0.95rem;
   margin-top: 40px;
   border-top: 1px solid #eee;
