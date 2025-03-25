@@ -4,10 +4,11 @@ Welcome to the **Potluck App**, a full-stack recipe-sharing application built wi
 
 ---
 
-## 🌐 Live Deployment
+## 🚀 Live Deployment
 
-- **Frontend URL (Netlify)**: [potluck-app.netlify.app]
-- **Backend API (Render)**: [https://capstone-backend-zdhp.onrender.com](https://capstone-backend-zdhp.onrender.com)
+🔗 [Live Frontend App (Netlify)](https://potluck-app.netlify.app)  
+🌐 [Live Backend API (Render)](https://capstone-backend-zdhp.onrender.com)
+
 
 This site is fully connected to the backend API and supports real-time user authentication, recipe uploads, saving favorites, commenting, and more.
 
