@@ -16,7 +16,7 @@ const EditRecipe = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/api/recipes/${id}`);
+        const response = await axios.get(`https://capstone-backend-zdhp.onrender.com/api/recipes/${id}`);
         setFormData({
           name: response.data.name,
           category: response.data.category,
@@ -55,7 +55,7 @@ const EditRecipe = () => {
     }
 
     try {
-      await axios.put(`http://localhost:5001/api/recipes/${id}`, formDataToSend, {
+      await axios.put(`https://capstone-backend-zdhp.onrender.com/api/recipes/${id}`, formDataToSend, {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "multipart/form-data",

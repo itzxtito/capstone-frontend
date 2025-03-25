@@ -11,7 +11,7 @@ const RecipeList = () => {
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/api/recipes`, {
+        const response = await axios.get(`https://capstone-backend-zdhp.onrender.com/api/recipes`, {
           params: {
             search: searchTerm,
             category: category !== "All" ? category : undefined,
@@ -92,7 +92,7 @@ const RecipeList = () => {
               className="recipe-link">
               <div className="recipe-card">
                 <img
-                  src={`http://localhost:5001${recipe.image}`}
+                  src={`https://capstone-backend-zdhp.onrender.com${recipe.image}`}
                   alt={recipe.name}
                 />
                 <h3>{recipe.name}</h3>

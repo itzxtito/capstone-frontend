@@ -40,7 +40,7 @@ const AddRecipe = () => {
 
     try {
       // Add token to the Authorization header
-      const response = await axios.post("http://localhost:5001/api/recipes", formData, {
+      const response = await axios.post("https://capstone-backend-zdhp.onrender.com/api/recipes", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${token}`, // Add JWT token here

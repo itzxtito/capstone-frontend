@@ -14,7 +14,7 @@ const RecipeDetails = () => {
   useEffect(() => {
     const fetchRecipe = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/api/recipes/${id}`);
+        const response = await axios.get(`https://capstone-backend-zdhp.onrender.com/api/recipes/${id}`);
         setRecipe(response.data);
       } catch (error) {
         console.error("Error fetching recipe:", error);
@@ -23,7 +23,7 @@ const RecipeDetails = () => {
 
     const fetchComments = async () => {
       try {
-        const response = await axios.get(`http://localhost:5001/api/comments/${id}`);
+        const response = await axios.get(`https://capstone-backend-zdhp.onrender.com/api/comments/${id}`);
         setComments(response.data);
       } catch (error) {
         console.error("Error fetching comments:", error);
@@ -38,7 +38,7 @@ const RecipeDetails = () => {
     const username = localStorage.getItem("username"); // Get the username from localStorage
   
     try {
-      await axios.post(`http://localhost:5001/api/users/${username}/favorites`, {
+      await axios.post(`https://capstone-backend-zdhp.onrender.com/api/users/${username}/favorites`, {
         recipeId: recipe._id,
       }, {
         headers: {
@@ -58,7 +58,7 @@ const RecipeDetails = () => {
     if (!newComment.trim()) return;
   
     try {
-      const response = await axios.post(`http://localhost:5001/api/comments/${id}`, {
+      const response = await axios.post(`https://capstone-backend-zdhp.onrender.com/api/comments/${id}`, {
         username: localStorage.getItem("username"),
         text: newComment,
       });
@@ -82,7 +82,7 @@ const RecipeDetails = () => {
     <div className="container recipe-details">
       <h2>{recipe.name}</h2>
       <p><strong>Posted by:</strong> {recipe.author}</p>
-      <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} className="recipe-image" />
+      <img src={`https://capstone-backend-zdhp.onrender.com${recipe.image}`} alt={recipe.name} className="recipe-image" />
       <section>
       <h3>Ingredients:</h3>
       <ul className="ingredient-list">
