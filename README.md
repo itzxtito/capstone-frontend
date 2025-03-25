@@ -4,6 +4,22 @@ Welcome to the **Potluck App**, a full-stack recipe-sharing application built wi
 
 ---
 
+## 🌐 Live Deployment
+
+- **Frontend URL (Netlify)**: [https://capstone-frontend.netlify.app](https://capstone-frontend.netlify.app)
+- **Backend API (Render)**: [https://capstone-backend-zdhp.onrender.com](https://capstone-backend-zdhp.onrender.com)
+
+This site is fully connected to the backend API and supports real-time user authentication, recipe uploads, saving favorites, commenting, and more.
+
+## 🛠 Environment Variables
+
+Make sure your `.env` file includes:
+
+VITE_API_URL=https://capstone-backend-zdhp.onrender.com
+
+---
+
+
 ## 🔧 Technologies Used
 - **Frontend:** React, Vite, CSS
 - **Backend:** Node.js, Express
