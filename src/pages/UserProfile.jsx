@@ -92,10 +92,12 @@ const UserProfile = () => {
                 <img src={`http://localhost:5001${recipe.image}`} alt={recipe.name} />
                 <h3>{recipe.name}</h3>
               </Link>
+              <div className="button-group">
               <button onClick={() => handleDelete(recipe._id, recipe.author)} className="delete-btn">
                 Delete
               </button>
               <Link to={`/edit-recipe/${recipe._id}`} className="edit-btn">Edit</Link>
+              </div>
             </div>
           ))}
         </div>

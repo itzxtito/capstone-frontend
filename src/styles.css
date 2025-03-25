@@ -75,13 +75,25 @@ button:hover {
   background-color: #e5533d;
   transform: scale(1.05);
 }
+.button-group {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 15px;
+}
+
+.recipe-card .button-group button,
+.recipe-card .button-group a {
+  margin: 0;
+}
+
 
 
 
 .edit-btn {
   background-color: #007bff;
   margin-left: 10px;
-}
+  }
 
 .edit-btn:hover {
   background-color: #0056b3;
@@ -145,6 +157,9 @@ a {
   margin-top: 10px;
   font-size: 1.1rem;
 }
+
+
+
 
 /* ---------------------- */
 /* Recipe List Page       */
@@ -291,7 +306,6 @@ ul {
 
 .recipe-card .edit-btn {
   background-color: #007bff;
-  border-radius: 8px;
 }
 
 
@@ -301,7 +315,7 @@ ul {
 
 .recipe-card .delete-btn {
   background-color: #dc3545;
-  border-radius: 8px;
+ 
 }
 
 
